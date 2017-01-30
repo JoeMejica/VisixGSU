@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="HTML5 Clock and Date for Visix">
+    <meta name="author" content="Joe Mejica - Learning Environments Design">
+
+    <title>Visix HTML 5 DateTime</title>
+    
+    <!-- utilizing Bootstrap CSS for responsiveness -->
+     <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <style>
+        #clockdate {
+            
+            /* Utilize ADA compliant font type/family */
+            font-family: 'Helvetica';
+            /* GSU Blue: RGB(0,57,166) */
+            color: rgb(0, 57, 166);
+            text-align: right;
+            position: relative;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+        }
+        
+        #clock {
+            font-size: 20vw;
+            margin-bottom: -30px;
+        }
+        
+        #date {
+            font-size: 8vw;
+        }
+    </style>
+
+</head>
+
+<body onload="startTime()">
+
+    <!-- MAIN HTML DIV -->
+    <div id="clockdate">
+        <div class="clockdate-wrapper">
+            <div id="clock"></div>
+            <div id="date"></div>
+        </div>
+    </div>
+    
+    
+    
+
+    <script>
+        function startTime() {
+            var today = new Date();
+            var hr = today.getHours();
+            var min = today.getMinutes();
+            var sec = today.getSeconds();
+            
+            
+            ap = (hr < 12) ? "<span>AM</span>" : "<span>PM</span>";
+            hr = (hr == 0) ? 12 : hr;
+            hr = (hr > 12) ? hr - 12 : hr;
+            hr = (hr)
+            
+                //Add a zero in front of numbers<10
+                //hr = appendZero(hr);
+            min = appendZero(min);
+            sec = appendZero(sec);
+            document.getElementById("clock").innerHTML = hr + ":" + min + " " + ap;
+
+            var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            var curWeekDay = days[today.getDay()];
+            var curDay = today.getDate();
+            var curMonth = months[today.getMonth()];
+            var curYear = today.getFullYear();
+            var date = curWeekDay + " " + curMonth + " " + curDay + ", " + curYear;
+            document.getElementById("date").innerHTML = date;
+
+            var time = setTimeout(function () {
+                startTime()
+            }, 500);
+        }
+        
+        //adds leading 0 to hour, minute, second 
+        function appendZero(i) {
+            if (i < 10) {
+                i = "0" + i;
+            }
+            return i;
+        }
+    </script>
+
+
+</body>
+
+
+
+
+</html>

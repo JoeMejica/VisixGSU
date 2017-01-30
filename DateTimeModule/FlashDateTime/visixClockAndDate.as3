@@ -1,0 +1,79 @@
+import flash.utils.Timer;
+
+var looper:Timer=new Timer(.0000000000000001);
+
+var dayArray:Array = new Array("Sun", "Mon", "Tue",
+"Wed", "Thu", "Fri", "Sat"); 
+
+//array to store months
+var monthArray:Array = new Array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
+
+
+var time:Date;
+//use uint type instead of number for these vars.because they won't contain decimals!
+
+var month:uint;
+var day:uint;
+var year:uint; 
+
+//initialize dynamic text values as Strings
+var hour:String;
+var minute:String;     
+var day_str:String;
+
+var month_str:String; //variable to store month value 
+
+var hour12:uint;
+var AM_PM:Object;
+
+
+
+
+
+
+looper.start();
+looper.addEventListener(TimerEvent.TIMER, looptime)
+
+//execute the function when starting app
+looptime(null);
+
+stop();
+
+function looptime(event:TimerEvent):void{
+    time=new Date();
+
+    month = time.getMonth();
+    day =  time.getDate(); //originally was time.getDate()+1;
+    year= time.getFullYear();
+
+    //if hour > 12, -12 to value to reflect 12h clock, if hour < 1 (12:00am), +12 to reflect 12:00am 
+    hour12 =time.getHours()>12?time.getHours()-12:time.getHours()<1?time.getHours()+12:time.getHours(); 
+    
+    
+    
+ 
+    AM_PM=String(time.getHours()>11?" PM":" AM");
+    time.getMonth();
+    
+    
+    
+    hour= String(hour12); //store hour12 in var hour 
+    
+  
+    
+    
+    
+    minute=time.getMinutes()>9?String(time.getMinutes()):"0"+String(time.getMinutes());
+    
+    day_str=dayArray[time.getDay()] //pull day of week from array
+    
+    month_str=monthArray[time.getMonth()]; //pull month of year from array 
+    
+    
+
+
+   
+    Date_txt.text =day_str + "," + " " + " " + month_str + " " + day + "," + " " + year; //month_str = display month 
+
+    Time_txt.text = hour + ":" + minute+AM_PM;
+}
